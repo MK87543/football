@@ -5,7 +5,6 @@ import './index.css'
 import App from './App.tsx'
 import Overview from './components/overview.tsx'
 import Header from './components/header.tsx'
-import Search from './components/search.tsx'
 
 
 
@@ -14,5 +13,5 @@ createRoot(document.getElementById('root')!).render(
     <Header />
     <Overview />
     <App />
-  </StrictMode>,
+  </StrictMode>
 )
