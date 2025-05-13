@@ -22,7 +22,7 @@ export default function Overview() {
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchYear, setSearchYear] = useState("");
-  const [selectedLeague, setSelectedLeague] = useState<{ leagueShortcut: string, leagueSeason: string, viewtype: 'goalgetters' | 'table' } | null>(null);
+  const [selectedLeague, setSelectedLeague] = useState<{ leagueShortcut: string, leagueSeason: string, viewType: 'goalgetters' | 'table' } | null>(null);
   const [viewMode, setViewMode] = useState('list');
   const viewType: 'goalgetters' | 'table' = 'goalgetters';
 
@@ -65,7 +65,7 @@ export default function Overview() {
 
 
   const handleLeagueClick = (leagueShortcut: string, leagueSeason: string, viewType?: 'goalgetters' | 'table') => {
-    setSelectedLeague({ leagueShortcut, leagueSeason, viewType });
+    setSelectedLeague({ leagueShortcut, leagueSeason, viewType: viewType || 'goalgetters' });
     setViewMode('detail');
   };
 
