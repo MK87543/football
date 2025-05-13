@@ -11,6 +11,8 @@ interface League {
     sportId: number;
     sportName: string;
   };
+
+
 }
 
 export default function Overview() {
@@ -20,8 +22,10 @@ export default function Overview() {
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchYear, setSearchYear] = useState("");
-  const [selectedLeague, setSelectedLeague] = useState<{ leagueShortcut: string, leagueSeason: string } | null>(null);
+  const [selectedLeague, setSelectedLeague] = useState<{ leagueShortcut: string, leagueSeason: string, viewtype: 'goalgetters' | 'table' } | null>(null);
   const [viewMode, setViewMode] = useState('list');
+  const viewType: 'goalgetters' | 'table' = 'goalgetters';
+
 
   useEffect(() => {
     fetchAllLeagues();
@@ -58,8 +62,10 @@ export default function Overview() {
     setFilteredLeaguesYear(filteredLeaguesYear);
   }
 
-  const handleLeagueClick = (leagueShortcut: string, leagueSeason: string) => {
-    setSelectedLeague({ leagueShortcut, leagueSeason });
+
+
+  const handleLeagueClick = (leagueShortcut: string, leagueSeason: string, viewType?: 'goalgetters' | 'table') => {
+    setSelectedLeague({ leagueShortcut, leagueSeason, viewType });
     setViewMode('detail');
   };
 
@@ -111,7 +117,7 @@ export default function Overview() {
                   Shortcut={league.leagueShortcut}
                   Season={league.leagueSeason}
                   Sport={league.sport?.sportName}
-                  onClick={() => handleLeagueClick(league.leagueShortcut, league.leagueSeason)}
+                  onClick={(viewType) => handleLeagueClick(league.leagueShortcut, league.leagueSeason, viewType)}
                 />
               ))
               : filteredLeagues.map((league) => (
@@ -121,7 +127,7 @@ export default function Overview() {
                   Shortcut={league.leagueShortcut}
                   Season={league.leagueSeason}
                   Sport={league.sport?.sportName}
-                  onClick={() => handleLeagueClick(league.leagueShortcut, league.leagueSeason)}
+                  onClick={(viewType) => handleLeagueClick(league.leagueShortcut, league.leagueSeason, viewType)}
                 />
               ))
             }
@@ -138,13 +144,17 @@ export default function Overview() {
 
           {selectedLeague && (
             <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-bold mb-4">Goal Scorers</h2>
+              <h2 className="text-2xl font-bold mb-4">
+                {selectedLeague.viewType === 'goalgetters' ? 'Goal Scorers' : 'League Table'}
+              </h2>
               <League_detail
                 leagueShortcut={selectedLeague.leagueShortcut}
                 leagueSeason={selectedLeague.leagueSeason}
+                viewType={selectedLeague.viewType}
               />
             </div>
           )}
+
         </div>
       )}
     </div>
