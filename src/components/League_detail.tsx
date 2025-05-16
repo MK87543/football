@@ -8,6 +8,7 @@ interface Props {
 export default function League_detail({ leagueShortcut, leagueSeason, viewType }: Props) {
     const [goalGetters, setGoalGetters] = useState([]);
     const [tableData, setTableData] = useState([]);
+    const [ClubImage, setClubImage] = useState<any>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -16,6 +17,7 @@ export default function League_detail({ leagueShortcut, leagueSeason, viewType }
             fetchGoalGetters();
         } else {
             fetchTableData();
+            fetchClubImages();
         }
     }, [leagueShortcut, leagueSeason, viewType]);
 
@@ -37,6 +39,26 @@ export default function League_detail({ leagueShortcut, leagueSeason, viewType }
                 setLoading(false);
             });
     };
+
+    const fetchClubImages = () => {
+        fetch(`https://api.openligadb.de/getavailableteams/${leagueShortcut}/${leagueSeason}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("League table data:", data);
+                setClubImage(data);
+                setLoading(false);
+            })
+            .catch(error => {
+                console.error("Error fetching table data:", error);
+                setLoading(false);
+            });
+
+    }
 
     const fetchTableData = () => {
         fetch(`https://api.openligadb.de/getbltable/${leagueShortcut}/${leagueSeason}`)
@@ -64,11 +86,16 @@ export default function League_detail({ leagueShortcut, leagueSeason, viewType }
     return (
         <div>
             {viewType === 'goalgetters' && (
+
                 <ul>
                     {goalGetters.map((getter: any) => (
-                        <li key={getter.goalGetterID}>
-                            {getter.goalGetterName} - Goals: {getter.goalCount}
-                        </li>
+
+                        <div className="border mb-4 w-150 rounded-md">
+                            <li key={getter.goalGetterID}>
+                                {getter.goalGetterName} - Goals: {getter.goalCount}
+                            </li>
+                        </div>
+
                     ))}
                 </ul>
             )}
@@ -76,9 +103,12 @@ export default function League_detail({ leagueShortcut, leagueSeason, viewType }
             {viewType === 'table' && (
                 <ul>
                     {tableData.map((team: any) => (
-                        <li key={team.teamInfoId || team.teamId}>
-                            {team.teamName} - Points: {team.points}, Rank: {team.rank}
-                        </li>
+                        <div className="border mb-4 w-150 rounded-md"><li key={team.teamInfoId || team.teamId}>
+                            <img src={ClubImage.find((club: any) => club.teamId === team.teamInfoId)?.teamIconUrl}
+                                alt={team.teamName}
+                                className="w-10 h-10 object-contain" />
+                            {team.teamName} - Points: {team.points}
+                        </li></div>
                     ))}
                 </ul>
             )}

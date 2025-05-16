@@ -35,7 +35,12 @@ export default function Overview() {
     fetch("https://api.openligadb.de/getavailableleagues")
       .then(response => response.json())
       .then(leaguesData => {
-        setLeagues(leaguesData);
+        setLeagues(
+          leaguesData.sort(
+            (a: any, b: any) => parseInt(b.leagueSeason, 10) - parseInt(a.leagueSeason, 10)
+          )
+        );
+
         setFilteredLeagues(leaguesData);
         setIsLoading(false);
       })
