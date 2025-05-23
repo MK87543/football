@@ -20,7 +20,6 @@ export default function real_test({ }: Props) {
     const [color, setColor] = useState(colorShades[0]);
 
 
-
     useEffect(() => {
         fetch('https://jsonplaceholder.typicode.com/posts/1/comments')
             .then(response => response.json())
@@ -34,7 +33,6 @@ export default function real_test({ }: Props) {
     useEffect(() => {
         console.log("active", active);
         setColor(colorShades[active ? 0 : 1]);
-
 
     }, [active]);
 

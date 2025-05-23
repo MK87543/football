@@ -5,16 +5,16 @@ import './index.css'
 import App from './App.tsx'
 import Overview from './components/overview.tsx'
 import Header from './components/header.tsx'
-import Test from './components/test002/real_test.tsx'
+import Test from './components/test002/test002.tsx'
 
 
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     {/* <Header /> 
-    <Overview />
+    <Overview />  
     <App />*/}
 
-    <Test />
+    <Test title="Test 002_übergabe" />
   </StrictMode>
 )
