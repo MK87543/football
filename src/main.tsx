@@ -11,6 +11,7 @@ function MainApplication() {
   const [searchYear, setSearchYear] = useState("");
 
   const toggleDarkMode = () => {
+
     setDarkMode(prevMode => !prevMode);
   };
 
@@ -31,7 +32,7 @@ function MainApplication() {
             value={searchTerm}
             onChange={(el) => setSearchTerm(el.target.value)}
             placeholder="Search by name"
-            className={`border h-10 px-2 rounded-md w-48 ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : 'bg-gray-300 border-gray-300 text-black'}`}
+            className={`border h-15 px-2 rounded-md w-58 text-2xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : 'bg-gray-300 border-gray-300 text-black'}`}
           />
 
           {searchTerm.length > 0 && (
@@ -40,7 +41,7 @@ function MainApplication() {
               value={searchYear}
               onChange={(el) => setSearchYear(el.target.value)}
               placeholder="Search by year"
-              className={`border h-10 px-2 rounded-md w-48 ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-black'}`}
+              className={`border h-15 px-2 rounded-md w-58 text-2xl ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : 'bg-gray-300 border-gray-300 text-black'}`}
             />
           )}
         </div>
@@ -48,7 +49,7 @@ function MainApplication() {
         {/* Dark mode switch */}
         <button
           onClick={toggleDarkMode}
-          className={`hover:cursor-pointer p-2 rounded transition-colors flex-shrink-0 ${darkMode
+          className={`hover:cursor-pointer p-2 rounded transition-colors flex h-15 pt-4 ${darkMode
             ? 'bg-gray-700 hover:bg-gray-600 text-white'
             : 'bg-gray-200 hover:bg-gray-300 text-black'
             }`}
