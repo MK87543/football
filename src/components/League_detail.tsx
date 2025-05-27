@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+
 interface Props {
     leagueShortcut: string;
     leagueSeason: string;
     viewType: 'goalgetters' | 'table';
+    darkmode: boolean;
 }
 
-export default function League_detail({ leagueShortcut, leagueSeason, viewType }: Props) {
+export default function League_detail({ leagueShortcut, leagueSeason, viewType, darkmode }: Props) {
     const [goalGetters, setGoalGetters] = useState([]);
     const [tableData, setTableData] = useState([]);
     const [ClubImage, setClubImage] = useState<any>([]);
@@ -80,22 +82,19 @@ export default function League_detail({ leagueShortcut, leagueSeason, viewType }
     };
 
     if (loading) {
-        return <div>Loading data...</div>;
+        return <div className={`${darkmode ? 'text-white' : 'text-black'}`}>Loading data...</div>;
     }
 
     return (
         <div>
             {viewType === 'goalgetters' && (
-
                 <ul>
                     {goalGetters.map((getter: any) => (
-
-                        <div className="border mb-4 w-150 rounded-md">
-                            <li key={getter.goalGetterID}>
+                        <div className={`border mb-4 w-150 rounded-md ${darkmode ? 'border-gray-600 bg-gray-800 text-white' : 'border-gray-300 bg-white text-black'}`}>
+                            <li key={getter.goalGetterID} className="p-3">
                                 {getter.goalGetterName} - Goals: {getter.goalCount}
                             </li>
                         </div>
-
                     ))}
                 </ul>
             )}
@@ -103,12 +102,14 @@ export default function League_detail({ leagueShortcut, leagueSeason, viewType }
             {viewType === 'table' && (
                 <ul>
                     {tableData.map((team: any) => (
-                        <div className="border mb-4 w-150 rounded-md"><li key={team.teamInfoId || team.teamId}>
-                            <img src={ClubImage.find((club: any) => club.teamId === team.teamInfoId)?.teamIconUrl}
-                                alt={team.teamName}
-                                className="w-10 h-10 object-contain" />
-                            {team.teamName} - Points: {team.points}
-                        </li></div>
+                        <div className={`border mb-4 w-150 rounded-md ${darkmode ? 'border-gray-600 bg-gray-800 text-white' : 'border-gray-300 bg-white text-black'}`}>
+                            <li key={team.teamInfoId || team.teamId} className="p-3 flex items-center">
+                                <img src={ClubImage.find((club: any) => club.teamId === team.teamInfoId)?.teamIconUrl}
+                                    alt={team.teamName}
+                                    className="w-10 h-10 object-contain mr-3" />
+                                {team.teamName} - Points: {team.points}
+                            </li>
+                        </div>
                     ))}
                 </ul>
             )}

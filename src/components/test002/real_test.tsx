@@ -12,8 +12,8 @@ type Props = {
 
 export default function real_test({ }: Props) {
     const colorShades = [
-        "bg-green-100",
-        "bg-red-100"]
+        "bg-green-200",
+        "bg-gray-100"]
 
     const [comment, setComment] = useState<Array<String>>([]);
     const [active, setActive] = useState<Boolean>(false);
