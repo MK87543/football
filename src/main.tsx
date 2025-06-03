@@ -80,5 +80,5 @@ if (container) {
     </StrictMode>
   );
 } else {
-  console.error("Failed to find the root element. Ensure an element with ID 'root' exists in your HTML.");
+  console.error("Failed to find the root element. Ensure an element with ID 'root' exists in your htmln.");
 }

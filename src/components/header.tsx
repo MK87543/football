@@ -1,5 +1,4 @@
 // File: src/components/overview.tsx
-import React from 'react'
 
 type Props = {}
 
