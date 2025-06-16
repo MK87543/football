@@ -2,12 +2,12 @@
 type Props = {}
 
 export default function example_1({ }: Props) {
-    const checks = ['überprüfung_1', 'überprüfung_2', 'überprüfung_3', 'überprüfung_4', 'überprüfung_5']
+    const checks = ['Überprüfung_1', 'Überprüfung_2', 'Überprüfung_3', 'Überprüfung_4', 'Überprüfung_5']
     return (
         <div>
             <h1 className='broder text-3xl font-bold p-8'>Wartung Teil 1</h1>
 
-            {/* Labels aligned above checkboxes */}
+
             <div className='pl-59'>
                 <div className='flex gap-4 mb-1'>
                     <span className='w-4 text-green-600 text-sm'>OK</span>
